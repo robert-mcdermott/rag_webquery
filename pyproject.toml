@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "rag_webquery"
+version = "0.1.0"
+description = ""
+authors = ["Robert McDermott <robert.c.mcdermott@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.scripts]
+rag-webquery = "rag_webquery:rag_webquery.main"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+chromadb = "0.4.15"
+bs4 = "^0.0.1"
+requests = "^2.31.0"
+gpt4all = "^2.0.2"
+langchain = "0.0.354"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
