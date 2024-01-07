@@ -1,6 +1,4 @@
 import argparse
-import json
-import logging
 import requests
 import os
 import sys
@@ -10,6 +8,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import GPT4AllEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain.chains import RetrievalQA
+from langchain_core._api.deprecation import suppress_langchain_deprecation_warning
 
 def main():
     """
@@ -24,10 +23,10 @@ def main():
     parser.add_argument("--model", default="zephyr:latest", help="The model to use (default: zephyr:latest)")
     parser.add_argument("--base_url", default="http://localhost:11434", help="The base URL for the Ollama (default: http://localhost:11434)")
     parser.add_argument("--chunk_size", type=int, default=200, help="The document token chunk size (default: 200)")
-    parser.add_argument("--chunk_overlap", type=int, default=50, help="The amount of chunk overlap (default: 100)")
+    parser.add_argument("--chunk_overlap", type=int, default=50, help="The amount of chunk overlap (default: 50)")
     parser.add_argument("--top_matches", type=int, default=4, help="The number the of top matching document chunks to retrieve (default: 4)")
     parser.add_argument("--system", default="You are a helpful assistant.", help="The system message provided to the LLM")
-    parser.add_argument("--temp", type=float, default=0.0, help="The model temperature setting (default: 0.0")
+    parser.add_argument("--temp", type=float, default=0.0, help="The model temperature setting (default: 0.0)")
     args = parser.parse_args()
 
     check_server_availability(args.base_url)
@@ -38,7 +37,7 @@ def main():
                 system=args.system,
                 temperature=args.temp,
                 num_ctx=2048
-             )
+    )
 
     loader = WebBaseLoader(args.website)
     data = loader.load()
@@ -46,12 +45,13 @@ def main():
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=args.chunk_size, chunk_overlap=args.chunk_overlap)
     all_splits = text_splitter.split_documents(data)
 
-    # Supress printing of emmbedding model loading message: still doesn't work!
+    # Suppress printing of emmbedding model loading message: still doesn't work!
     with SuppressStdout():
         vectorstore = Chroma.from_documents(documents=all_splits, embedding=GPT4AllEmbeddings())
 
-    qachain = RetrievalQA.from_chain_type(ollama, retriever=vectorstore.as_retriever(search_kwargs={"k": args.top_matches}))
-    res = (qachain({"query": args.question}))
+    with suppress_langchain_deprecation_warning():
+        qachain = RetrievalQA.from_chain_type(ollama, retriever=vectorstore.as_retriever(search_kwargs={"k": args.top_matches}))
+        res = (qachain.invoke({"query": args.question}))
 
     output(res)
 

@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "rag_webquery"
 version = "0.1.0"
-description = ""
+description = "Command line utility to query websites using a local LLM"
 authors = ["Robert McDermott <robert.c.mcdermott@gmail.com>"]
 readme = "README.md"
 
@@ -14,7 +14,8 @@ chromadb = "0.4.15"
 bs4 = "^0.0.1"
 requests = "^2.31.0"
 gpt4all = "^2.0.2"
-langchain = "0.0.354"
+langchain = "^0.1.0"
+langchain-community = "^0.0.9"
 
 
 [build-system]
