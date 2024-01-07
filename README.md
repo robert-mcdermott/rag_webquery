@@ -83,7 +83,9 @@ ollama pull mixtral:latest
 rag_webquery % rag-webquery https://en.wikipedia.org/wiki/Ukraine \
              "What are Ukraine's demographics?" \
              --model mixtral \
-             --system "You are a data extraction expert. You take information and return a valid JSON document that captures the information " \
+             --system "You are a data extraction expert. \
+                        You take information and return a valid JSON document \
+                        that captures the information " \
              --chunk_size 1500
 ```
 
