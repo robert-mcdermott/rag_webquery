@@ -1,6 +1,6 @@
 # Rag WebQuery
 
-![rag-webquery.png](images/rag-webquery.png)
+![rag-webquery.png](https://raw.githubusercontent.com/robert-mcdermott/rag_webquery/main/images/rag-webquery.png)
 
 ## Description
 **rag_webquery** is a command-line tool that allows you use a local Large Language Model (LLM) to answer questions from website contents. The utility extracts all textual information from the desired URL, chunks it up, converts it to embeddings stored in an in memory vector store that's used to find the most relevant information to use as context to answer the supplied question.
