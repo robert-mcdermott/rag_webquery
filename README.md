@@ -1,22 +1,22 @@
 # Rag WebQuery
 
 ## Description
-rag_webquery is a command-line tool that allows you use a local Large Language Model (LLM) to answer questions from website contents. The utility extracts all textual information from the desired URL, chunks it up, converts it to embeddings stored in an in memory vector store that's used to find the most relevant information to use as context to answer the supplied question.
+**rag_webquery** is a command-line tool that allows you use a local Large Language Model (LLM) to answer questions from website contents. The utility extracts all textual information from the desired URL, chunks it up, converts it to embeddings stored in an in memory vector store that's used to find the most relevant information to use as context to answer the supplied question.
 
 ## Requirements
 
 - **Python**: The utility is written in python so you'll need Python 3.9 or greater installed.
-- **Ollama**: To host the local LLMs you'll also have to install and have [Ollama](https://ollama.ai/) running.
+- **Ollama**: To host the local LLMs you'll also have to have [Ollama](https://ollama.ai/) running.
 - **LLM(s)**: The LLM(s) that you want to answer your question need to be downloaded "pulled" with Ollama.
 - **GPU/Memory**: A GPU is recommended by it will still run (very slowly) without one, and you should have 16GB of system RAM (more of less depending on the model you use)
 
-By default Rag-webquery uses the [Zephyr](https://huggingface.co/HuggingFaceH4/zephyr-7b-beta) model which is a fined tuned version of Mistral 7B.  After Ollama is installed and running you need to download it with the following command:
+By default **rag-webquery** uses the [Zephyr](https://huggingface.co/HuggingFaceH4/zephyr-7b-beta) model which is a fined tuned version of Mistral 7B.  After Ollama is installed and running you need to download it with the following command:
 
 ```bash
 ollama pull zephyr:latest
 ```
 
-Ollama support several other models you can choose from in the [library](https://ollama.ai/library). If you use a model other than Zephyr, you'll need to specify it with the rag-webquery '--model' flag.
+Ollama support several other models you can choose from in the [library](https://ollama.ai/library). If you use a model other than Zephyr, you'll need to specify it with the **rag-webquery** '--model' flag.
 
 
 ## Installation
@@ -61,14 +61,22 @@ options:
 **Most basic usage**:
 
 ```bash
-rag-webquery https://en.wikipedia.org/wiki/Ukraine "What was holomodor? What was its root cause?"
+rag-webquery https://en.wikipedia.org/wiki/Ukraine \
+            "What was holomodor? What was its root cause?"
 ```
 
 **Example output**:
 
-```text
+```
 ### Answer:
-The Holodomor was a major famine that took place in Soviet Ukraine during 1932 and 1933. It led to the death by starvation of millions of Ukrainians, particularly peasants. The root cause of the Holodomor was the forced collectivization of crops and their confiscation by Soviet authorities. This policy aimed to centralize agricultural production but instead resulted in widespread food shortages and devastating consequences for the local population. Some countries have recognized this event as an act of genocide perpetrated by Joseph Stalin and other Soviet notables.
+The Holodomor was a major famine that took place in Soviet Ukraine during
+1932 and 1933. It led to the death by starvation of millions of Ukrainians,
+particularly peasants. The root cause of the Holodomor was the forced
+collectivization of crops and their confiscation by Soviet authorities. This
+policy aimed to centralize agricultural production but instead resulted in
+widespread food shortages and devastating consequences for the local
+population. Some countries have recognized this event as an act of genocide
+perpetrated by Joseph Stalin and other Soviet notables.
 ```
 
 **More complicated usage**:
@@ -78,6 +86,8 @@ In this example I'll be using the very powerful "Mixtral 8x7B" MoE model, so fir
 ```bash
 ollama pull mixtral:latest 
 ```
+
+Then I can use it with a custom system messages to provide JSON formatted demographics that is will extract from the website content.
 
 ```bash
 rag-webquery https://en.wikipedia.org/wiki/Ukraine \
