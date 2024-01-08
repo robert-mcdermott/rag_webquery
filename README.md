@@ -88,7 +88,7 @@ In this example I'll be using the very powerful "Mixtral 8x7B" model, so first I
 ollama pull mixtral:latest 
 ```
 
-Then I can use it with a custom system messages to provide JSON formatted demographics that it will extract from the website content.
+Then I can use it with a custom system message that instructs it perform the role of a data extraction expert that only responds with JSON formatted output. Then I ask it about Ukraine's demographics, which it will extract from the website content and provide a JSON representation of.
 
 ```bash
 rag-webquery https://en.wikipedia.org/wiki/Ukraine \
