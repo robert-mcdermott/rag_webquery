@@ -3,14 +3,16 @@
 ![rag-webquery.png](https://raw.githubusercontent.com/robert-mcdermott/rag_webquery/main/images/rag-webquery.png)
 
 ## Description
-**rag_webquery** is a command-line tool that allows you use a local Large Language Model (LLM) to answer questions from website contents. The utility extracts all textual information from the desired URL, chunks it up, converts it to embeddings stored in an in memory vector store that's used to find the most relevant information to use as context to answer the supplied question.
+**rag_webquery** is a command-line tool that allows you to use a local Large Language Model (LLM) to answer questions from website contents. The utility extracts all textual information from the desired URL, chunks it up, converts it to embeddings stored in an in-memory vector store, that's then used to find the most relevant information to use as context to answer the supplied question.
 
 ## Requirements
 
 - **Python**: The utility is written in python so you'll need Python 3.9 or greater installed.
-- **Ollama**: To host the local LLMs you'll also have to have [Ollama](https://ollama.ai/) running.
-- **LLM(s)**: The LLM(s) that you want to answer your question need to be downloaded "pulled" with Ollama.
-- **GPU/Memory**: A GPU is recommended by it will still run (very slowly) without one, and you should have 16GB of system RAM (more of less depending on the model you use)
+- **Ollama**: To host the local LLMs you'll need to have [Ollama](https://ollama.ai/) running.
+- **LLM(s)**: The LLM(s) that you want to answer your questions need to be downloaded (pulled) with Ollama.
+- **GPU**: A GPU is recommended but it will work with a CPU only system without one albeit slowly
+- **RAM**: Enough system RAM to run the selected model; the default model (Zephyr 7B) requires a minium of 8GB; 16GB system recommended.
+- **OS**: Ollama currently only runs on MacOS and Linux, Windows support coming soon.
 
 By default **rag-webquery** uses the [Zephyr](https://huggingface.co/HuggingFaceH4/zephyr-7b-beta) model which is a fined tuned version of Mistral 7B.  After Ollama is installed and running you need to download it with the following command:
 
@@ -18,7 +20,7 @@ By default **rag-webquery** uses the [Zephyr](https://huggingface.co/HuggingFace
 ollama pull zephyr:latest
 ```
 
-Ollama support several other models you can choose from in the [library](https://ollama.ai/library). If you use a model other than Zephyr, you'll need to specify it with the **rag-webquery** '--model' flag.
+Ollama supports several other models that you can choose from in the [library](https://ollama.ai/library). If you want to use a model other than Zephyr, you'll need to pull it with Ollama and specify it with the **rag-webquery** '--model' flag.
 
 
 ## Installation
@@ -27,8 +29,7 @@ Assuming you already have Python installed on your system, you can easily instal
 
 ```bash
 pip install -U rag_webquery
-```
-
+``` 
 
 ## Usage 
 
@@ -60,13 +61,13 @@ options:
 ```
 
 
-**Most basic usage**:
+### **Most basic usage**:
 
 ```bash
 rag-webquery https://en.wikipedia.org/wiki/Ukraine "What was holomodor? What was its root cause?"
 ```
 
-**Example output**:
+**Output**:
 
 ```
 ### Answer:
@@ -80,7 +81,7 @@ population. Some countries have recognized this event as an act of genocide
 perpetrated by Joseph Stalin and other Soviet notables.
 ```
 
-**More complicated usage**:
+### **More complicated usage**:
 
 In this example I'll be using the very powerful "Mixtral 8x7B" model, so first I'll need to pull it:
 
@@ -99,6 +100,8 @@ rag-webquery https://en.wikipedia.org/wiki/Ukraine \
                         that captures the information " \
              --chunk_size 1500
 ```
+
+**Output**:
 
 ```json
 {
