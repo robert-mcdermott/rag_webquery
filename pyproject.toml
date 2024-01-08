@@ -4,6 +4,10 @@ version = "0.1.0"
 description = "Command line utility to query websites using a local LLM"
 authors = ["Robert McDermott <robert.c.mcdermott@gmail.com>"]
 readme = "README.md"
+license = "Apache-2.0"
+repository = "https://github.com/robert-mcdermott/rag_webquery"
+keywords = ["llm"]
+
 
 [tool.poetry.scripts]
 rag-webquery = "rag_webquery:rag_webquery.main"
