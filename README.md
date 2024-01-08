@@ -25,7 +25,7 @@ Ollama supports several other models that you can choose from in the [library](h
 
 ## Installation
 
-Assuming you already have Python installed on your system, you can easily install it with pip with this command:
+The rag_webquery has be packaged and published to [PyPI](https://pypi.org/project/rag_webquery/), so assuming you already have Python installed on your system, you can easily install it with pip with this command:
 
 ```bash
 pip install -U rag_webquery
