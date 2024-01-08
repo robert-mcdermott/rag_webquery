@@ -80,7 +80,7 @@ ollama pull mixtral:latest
 ```
 
 ```bash
-rag_webquery % rag-webquery https://en.wikipedia.org/wiki/Ukraine \
+rag-webquery https://en.wikipedia.org/wiki/Ukraine \
              "What are Ukraine's demographics?" \
              --model mixtral \
              --system "You are a data extraction expert. \
