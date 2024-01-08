@@ -1,5 +1,7 @@
 # Rag WebQuery
 
+![rag-webquery.png](images/rag-webquery.png)
+
 ## Description
 **rag_webquery** is a command-line tool that allows you use a local Large Language Model (LLM) to answer questions from website contents. The utility extracts all textual information from the desired URL, chunks it up, converts it to embeddings stored in an in memory vector store that's used to find the most relevant information to use as context to answer the supplied question.
 
@@ -61,8 +63,7 @@ options:
 **Most basic usage**:
 
 ```bash
-rag-webquery https://en.wikipedia.org/wiki/Ukraine \
-            "What was holomodor? What was its root cause?"
+rag-webquery https://en.wikipedia.org/wiki/Ukraine "What was holomodor? What was its root cause?"
 ```
 
 **Example output**:
@@ -81,13 +82,13 @@ perpetrated by Joseph Stalin and other Soviet notables.
 
 **More complicated usage**:
 
-In this example I'll be using the very powerful "Mixtral 8x7B" MoE model, so first I'll need to pull it:
+In this example I'll be using the very powerful "Mixtral 8x7B" model, so first I'll need to pull it:
 
 ```bash
 ollama pull mixtral:latest 
 ```
 
-Then I can use it with a custom system messages to provide JSON formatted demographics that is will extract from the website content.
+Then I can use it with a custom system messages to provide JSON formatted demographics that it will extract from the website content.
 
 ```bash
 rag-webquery https://en.wikipedia.org/wiki/Ukraine \
