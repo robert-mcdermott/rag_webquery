@@ -153,3 +153,4 @@ rag-webquery https://en.wikipedia.org/wiki/Ukraine \
     }
 }
 ```
+Pretty good. The output is valid JSON, but you'd get the response in the extract structure you want if you provide it an empty JSON template to use as part of your prompt (question).  
